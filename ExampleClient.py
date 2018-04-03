@@ -4,10 +4,10 @@ Author: Amol Kapoor
 """
 
 import sys
-from SocketWrapper import SocketWrapper
+import SocketWrapper as sw
 
 
-s = SocketWrapper(is_listener=False, socket_info=('localhost', 5000))
+s = sw.SocketWrapper(is_listener=False, socket_info=('localhost', 5001))
 
 try:
     while True:
