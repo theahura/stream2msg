@@ -9,10 +9,12 @@ import socket
 
 class SocketWrapper(object):
 
-    def __init__(self, is_listener, socket_info):
+    def __init__(self, is_listener, socket_info, socket=None):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        if not is_listener:
+        if socket:
+            self.socket = socket
+        elif not is_listener:
             self.socket = s
             self.socket.connect(socket_info)
         else:
