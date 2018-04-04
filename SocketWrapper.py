@@ -38,7 +38,7 @@ class SocketWrapper(object):
         needs to be tracked by the user on the receiving end."""
 
         if self.closed:
-            raise ConnectionRefusedError('Socket closed')
+            raise SystemError('Socket closed')
 
         if type(data) != str:
             raise ValueError('Send data expects string data')
@@ -67,7 +67,7 @@ class SocketWrapper(object):
         rest. Returns an array with metadata in front and the data in the last
         index."""
         if self.closed:
-            raise ConnectionRefusedError('Socket closed')
+            raise SystemError('Socket closed')
         data_str = self.socket.recv(10)
         if not data_str:
             self.close_socket()
