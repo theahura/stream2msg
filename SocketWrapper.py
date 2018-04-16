@@ -43,11 +43,8 @@ class SocketWrapper(object):
         if type(data) != str:
             raise ValueError('Send data expects string data')
         data = '---'.join([str(md) for md in metadata]) + '---' + data
-        if len(str(len(data))) > 10 - 3:
-            raise ValueError('Data being sent is too large')
         data = str(len(data)) + '___' + data
-        if len(data) <= 10:
-            raise ValueError('Data being sent is too small')
+
         try:
             self.socket.send(data)
         except Exception as e:
@@ -68,10 +65,14 @@ class SocketWrapper(object):
         index."""
         if self.closed:
             raise SystemError('Socket closed')
-        data_str = self.socket.recv(10)
-        if not data_str:
-            self.close_socket()
-            return None
+
+        data_str = ''
+        while '___' not in data_str:
+            new_data_str = self.socket.recv(1)
+            if not new_data_str:
+                self.close_socket()
+                return None
+            data_str += new_data_str
         message_size, data_str = data_str.split('___', 1)
         message_size = int(message_size)
         while len(data_str) < message_size:
