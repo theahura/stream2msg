@@ -37,8 +37,8 @@ client.send_data('hello world2')
 client.send_data('hello world3')
 
 # Server gets message.
-print server.get_message()  # Will print ['', hello world].
-print server.get_message()  # Will print ['', hello world2].
+print server.get_message()  # Will print ['', 'hello world'].
+print server.get_message()  # Will print ['', 'hello world2'].
 ```
   
 Allows sending of metadata in addition to string messages. Metadata can be sent as an array, and is returned as the first LEN-1 elements of the received message. The string data is always the LEN-1 index of the message.  
