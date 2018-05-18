@@ -60,7 +60,7 @@ class SocketWrapper(object):
     def get_message(self):
         """Gets a message.
 
-        Grabs the first 10 chars to get length of the message, then gets the
+        Grabs the first N chars to get length of the message, then gets the
         rest. Returns an array with metadata in front and the data in the last
         index."""
         if self.closed:

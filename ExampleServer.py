@@ -4,10 +4,10 @@ Author: Amol Kapoor
 """
 
 import sys
-import SocketWrapper as sw
+from stream2msg import SocketWrapper
 
 
-s = sw.SocketWrapper(is_listener=True, socket_info=('localhost', 5001))
+s = SocketWrapper(is_listener=True, socket_info=('localhost', 5001))
 
 try:
     while True:
