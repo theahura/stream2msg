@@ -62,7 +62,16 @@ client.send_data(pickle.dumps(x))
 
 # Server gets message with metadata.
 message = server.get_message()
-print pickle.loads(message[-1])  # Will print 'hello world'.
+print pickle.loads(message[-1])  # Will print {'object': 'data'}.
+```
+
+Users can set up custom sockets and put them in the wrapper after the fact. It is assumed that the user will handle the initial connection. For example: 
+```python
+import socket
+
+user_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+user_socket.connect(('localhost', 5000))
+wrapper = SocketWrapper(s_listener=None, socket_info=None, user_socket=user_socket)
 ```
 
 See ExampleClient and ExampleServer for basic echo server implementation.
